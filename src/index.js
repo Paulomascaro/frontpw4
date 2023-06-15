@@ -9,7 +9,9 @@ import Cadastro from "./componentes/Cadastro";
 import Login from "./componentes/Login";
 import NovaMensagem from "./componentes/NovaMensagem";
 import {EditarUser} from "./componentes/EditarUser";
-// import {ListarMensagem} from "./componentes/ListarMensagem";
+import NovaResposta from "./componentes/NovaResposta";
+import {ListarResposta} from "./componentes/ListarResposta";
+
 
 
 const router = createBrowserRouter([
@@ -17,13 +19,14 @@ const router = createBrowserRouter([
         path: "/",
         element: <App />,
         children: [
-            {path: "", element: <Home />},
+            {path: "", element: <Login />},
             {path: "home", element: <Home />},
             {path: "cadastro", element: <Cadastro />},
             {path: "login", element: <Login />},
             {path: "novamensagem", element: <NovaMensagem />},
-            {path: "editar", element: <EditarUser />}
-            // {path: "listarmensagem", element: <ListarMensagem />}
+            {path: "editar", element: <EditarUser />},
+            {path: "novaresposta/:id", element: <NovaResposta />, },
+            {path: "mensagem/:id", element: <ListarResposta />}
         ]
     },
 ]);

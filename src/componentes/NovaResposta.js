@@ -1,31 +1,36 @@
-export default function NovaMensagem() {
-    function enviarMensagem() {
+import {useParams} from "react-router";
+
+export default function NovaResposta() {
+    const {id} = useParams();
+
+    function enviarResposta() {
         let msg = document.getElementById("mensagem").value;
+
         let headersList = {
             "Accept": "*/*",
             "Content-Type": "application/x-www-form-urlencoded"
 
         }
         if(msg !== "") {
-            fetch("http://localhost:3008/mensagem/adicionar", {
+            fetch("http://localhost:3008/resposta/adicionar/", {
                 method: "POST",
                 headers: headersList,
-                body: "msg=" + msg + "&id_usuario=" + localStorage.getItem("id"),
+                body: "msg=" + msg + "&id_mensagemPrincipal=" + id + "&id_usuario=" + localStorage.getItem("id"),
 
             }).then((response) => {
                 if (response.status === 200) {
-                    alert("Mensagem cadastrada com sucesso!");
+                    alert("Resposta cadastrada com sucesso!");
                 } else {
                     alert("Erro ao cadastrar!");
                 }
             });
             window.location.href = "/home";
         }
-    }
+}
     return (
-        <div className="sm:col-span-2 mx-8">
+        <div className="sm:col-span-2">
             <label htmlFor="mensagem" className="block text-sm font-semibold leading-6 text-gray-900">
-                <div className="text-3xl font-bold mt-2 sm:mx-auto">Pergunte Aqui!</div>
+                <div className="text-3xl font-bold mt-2 sm:mx-auto">Nova Resposta!</div>
             </label>
             <br />
             <div className="mt-2.5">
@@ -40,7 +45,7 @@ export default function NovaMensagem() {
             </div>
             <br />
             <button
-                onClick={enviarMensagem}
+                onClick={enviarResposta}
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-gray-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-stone-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                 Cadastrar
